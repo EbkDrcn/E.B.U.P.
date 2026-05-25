@@ -44,7 +44,8 @@ class EBUProtocol(EBUPConstants) :
             "msg" : handlers.handleMsg,
             "discovery" : handlers.handleDiscovery,
             "ack_query" : handlers.handleAckQuery,
-            "msgInfo" : handlers.handleMsgInfo
+            "msgInfo" : handlers.handleMsgInfo,
+            "chunk" : handlers.handleChunk
         }
 
     def sendPocket(self, destination,  data, priority = False):
@@ -148,7 +149,7 @@ class EBUProtocol(EBUPConstants) :
             print(f"There is {len(answers)} answers and from {answers}")
         
         if self.setAddressBook == True:
-            utils.updateAddressBook(answers)
+            utils.updateAddressBook(self, answers)
         else:
             self.addressBook = []
 
@@ -181,5 +182,3 @@ class EBUProtocol(EBUPConstants) :
 
         except Exception as e:
             print(f"Error : {e}")
-
-    
